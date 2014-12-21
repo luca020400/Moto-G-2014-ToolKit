@@ -52,34 +52,31 @@
 <h2>
 <a id="this-tool-include--" class="anchor" href="#this-tool-include--" aria-hidden="true"><span class="octicon octicon-link"></span></a>This tool include : </h2>
 
-<p>1) <a href="https://github.com/Chainfire" class="user-mention">@Chainfire</a> autoroot ( root without a recovery )</p>
+<p>1) Unlock / Relock the bootloader</p>
 
-<p>2) TWRP and PHILZ TOUCH ( root with a recovery ) ( You can flash or boot it )ù</p>
+<p>2) TWRP and PHILZ TOUCH ( root with a recovery ) ( You can flash or boot it )</p>
 
-<p>3) Remove/Restore Unlocked Bootloader Warning</p>
+<p>3) <a href="https://github.com/Chainfire" class="user-mention">@Chainfire</a> Autoroot ( root without a recovery )</p>
+
+<p>4) Remove/Restore Unlocked Bootloader Warning</p>
 
 <h2>
 <a id="how-to-use-" class="anchor" href="#how-to-use-" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use :</h2>
-
-<h2>
-<a id="you-need-an-unlocked-bootloader" class="anchor" href="#you-need-an-unlocked-bootloader" aria-hidden="true"><span class="octicon octicon-link"></span></a>You need an unlocked bootloader</h2>
-
-<p>Thanks to Falcon G for the guide :</p>
-
-<p><a href="http://forum.xda-developers.com/moto-g-2014/development/wip-unlock-bootloader-moto-g-2nd-gen-t2875728">http://forum.xda-developers.com/moto-g-2014/development/wip-unlock-bootloader-moto-g-2nd-gen-t2875728</a></p>
 
 <p>Reboot your phone into bootloader ( Volume Down and Power Button )</p>
 
 <p>Linux and Mac OS X:</p>
 
-<div class="highlight highlight-bash"><pre>./root.sh titan_<span class="pl-vo">$device</span> ( like titan_retaildsds )
+<div class="highlight highlight-bash"><pre>./bootloader.sh unlock/relock
+./root.sh titan_<span class="pl-vo">$device</span> ( like titan_retaildsds )
 ./twrp.sh boot/flash
 ./philz.bat boot/flash
 ./logo.sh nowarning/warning</pre></div>
 
 <p>Windows :</p>
 
-<div class="highlight highlight-bash"><pre>root.bat titan_<span class="pl-vo">$device</span> ( like titan_retaildsds )
+<div class="highlight highlight-bash"><pre>bootloader.bat unlock/relock
+root.bat titan_<span class="pl-vo">$device</span> ( like titan_retaildsds )
 twrp.bat boot/flash
 philz.bat boot/flash
 logo.sh nowarning/warning</pre></div>
