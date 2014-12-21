@@ -1,25 +1,16 @@
 #!/bin/bash
 
 if [ `uname -s` == "Darwin" ]; then
+	adb=bin/adb-linux
         fastboot=bin/fastboot-mac
 elif [ `uname -s` == "Linux" ]; then
+	adb=bin/adb-linux
         fastboot=bin/fastboot-linux
 else
         echo "Unsupported OS"
 fi
-case "$1" in
-        titan_retaildsds)
-            $fastboot boot autoroot/titan_retaildsds.img
-            ;;
-        titan_retde)
-            $fastboot boot autoroot/titan_retde.img
-            ;;
-        titan_retuglb)
-            $fastboot boot autoroot/titan_retuglb.img
-            ;;
-	titan_*)
-	    echo "Unsupported Device"
-	    ;;
-        *)
-            echo "You have to type ./root.sh device ( titan_ret*** )"
-esac
+
+$fastboot boot img/twrp.img
+$adb push UPDATE-SuperSU-v2.40.zip /tmp/.
+$adb shell twrp install /tmp/UPDATE-SuperSU-v2.40.zip
+$adb reboot-bootloader
