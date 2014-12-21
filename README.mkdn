@@ -10,9 +10,11 @@ This tool include :
 How to use :
 ------------
 Linux and Mac OS X:
+```bash
 ./root.sh titan_(device type : like titan_retaildsds )
 ./twrp.sh boot/flash
 ./philz.bat boot/flash
+```
 
 Windows :
 root.bat titan_(device type : like titan_retaildsds )
