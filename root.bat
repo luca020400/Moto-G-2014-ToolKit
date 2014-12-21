@@ -4,6 +4,8 @@ if %1==titan_retde goto titan_retde
 if %1==titan_retuglb goto titan_retuglb
 
 echo "You have to type root.bat device ( titan_ret*** )"
+echo "Maybe your phone is unsupported"
+echo "Check this site http://autoroot.chainfire.eu/"
 goto :exit
 
 :titan_retaildsds
