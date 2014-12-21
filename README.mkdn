@@ -17,9 +17,11 @@ Linux and Mac OS X:
 ```
 
 Windows :
+```bash
 root.bat titan_(device type : like titan_retaildsds )
 twrp.bat boot/flash
 philz.bat boot/flash
+```
 
 You need an unlocked bootloader
 -------------------------------
