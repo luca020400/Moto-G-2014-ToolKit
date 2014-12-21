@@ -11,6 +11,7 @@ else
 fi
 
 $fastboot boot img/twrp.img
+sleep 20
 $adb push supersu/UPDATE-SuperSU-v2.40.zip /tmp/.
 $adb shell twrp install /tmp/UPDATE-SuperSU-v2.40.zip
 $adb reboot-bootloader
