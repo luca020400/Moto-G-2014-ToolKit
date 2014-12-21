@@ -1,8 +1,10 @@
 #!/bin/bash
 if [ `uname -s` == "Darwin" ]; then
 	fastboot=bin/fastboot-mac
-else
+elif [ `uname -s` == "Linux" ]; then
 	fastboot=bin/fastboot-linux
+else
+	echo "Unsupported OS"
 fi
 case "$1" in
         boot)
