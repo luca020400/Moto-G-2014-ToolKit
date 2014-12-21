@@ -9,6 +9,15 @@ This tool include :
 
 How to use :
 ------------
+
+You need an unlocked bootloader
+-------------------------------
+Thanks to Falcon G for the guide :
+
+http://forum.xda-developers.com/moto-g-2014/development/wip-unlock-bootloader-moto-g-2nd-gen-t2875728
+
+Reboot your phone into bootloader ( Vol down and power button )
+
 Linux and Mac OS X:
 ```bash
 ./root.sh titan_(device type : like titan_retaildsds )
@@ -23,8 +32,3 @@ twrp.bat boot/flash
 philz.bat boot/flash
 ```
 
-You need an unlocked bootloader
--------------------------------
-Thanks to Falcon G for the guide :
-
-http://forum.xda-developers.com/moto-g-2014/development/wip-unlock-bootloader-moto-g-2nd-gen-t2875728
