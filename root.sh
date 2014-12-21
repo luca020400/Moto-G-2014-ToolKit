@@ -1,4 +1,5 @@
 #!/bin/bash
+
 if [ `uname -s` == "Darwin" ]; then
         fastboot=bin/fastboot-mac
 elif [ `uname -s` == "Linux" ]; then
