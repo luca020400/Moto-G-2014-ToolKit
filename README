@@ -1,3 +1,17 @@
+Tool for the Moto G 2014
+=============================
+
+This tool include : 
+-------------------
+1) @chainfire autoroot ( root without a recovery )
+2) TWRP and PHILZ TOUCH ( root with a recovery ) ( You can flash or boot it )
+
+How to use :
+------------
+root.bat ( windows ) / ./root.sh ( linux and mac ) titan_ret*
+twrp/philz.bat ( windows ) / ./twrp/./philz.bat ( linux and mac ) boot/flash
+
 You need an unlocked bootloader
+-------------------------------
 Thanks to Falcon G for the guide :
 http://forum.xda-developers.com/moto-g-2014/development/wip-unlock-bootloader-moto-g-2nd-gen-t2875728
