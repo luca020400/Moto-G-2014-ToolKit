@@ -20,7 +20,7 @@ bin\fastboot lock begin
 echo "Now you have to flash the stock image"
 echo "This is an example http://forum.xda-developers.com/moto-g-2014/general/restore-to-stock-t2873657"
 echo "When done press Enter"
-pause > null
+pause > nul
 bin\fastboot.exe oem lock
 echo "Your bootloader is now locked"
 
