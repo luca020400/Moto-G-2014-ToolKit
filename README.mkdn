@@ -9,6 +9,7 @@ This tool include :
 How to use :
 ------------
 root.bat ( windows ) / ./root.sh ( linux and mac ) titan_ret*
+
 twrp/philz.bat ( windows ) / ./twrp/./philz.bat ( linux and mac ) boot/flash
 
 You need an unlocked bootloader
