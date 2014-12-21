@@ -1,6 +1,6 @@
 @echo off
-if %1==boot goto unlock
-if %1==flash goto relock
+if %1==unlock goto unlock
+if %1==relock goto relock
 
 echo "You have to type bootloader.bat unlock or relock"
 goto exit
