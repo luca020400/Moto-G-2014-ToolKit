@@ -9,9 +9,15 @@ This tool include :
 
 How to use :
 ------------
-root.bat ( windows ) / ./root.sh ( linux and mac ) titan_ret*
+Linux and Mac OS X:
+./root.sh titan_(device type : like titan_retaildsds )
+./twrp.sh boot/flash
+./philz.bat boot/flash
 
-twrp/philz.bat ( windows ) / ./twrp/./philz.bat ( linux and mac ) boot/flash
+Windows :
+root.bat titan_(device type : like titan_retaildsds )
+twrp.bat boot/flash
+philz.bat boot/flash
 
 You need an unlocked bootloader
 -------------------------------
