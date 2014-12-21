@@ -10,8 +10,9 @@ else
         echo "Unsupported OS"
 fi
 
+supersu=UPDATE-SuperSU-v2.40.zip
 $fastboot boot img/twrp.img
 sleep 20
-$adb push supersu/UPDATE-SuperSU-v2.40.zip /tmp/.
-$adb shell twrp install /tmp/UPDATE-SuperSU-v2.40.zip
+$adb push supersu/$supersu /tmp/.
+$adb shell twrp install /tmp/$supersu
 $adb reboot-bootloader
