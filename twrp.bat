@@ -1,15 +1,16 @@
 @echo off
-if %1==boot goto fai_boot
-if %1==flash goto fai_flash
+if %1==boot goto boot
+if %1==flash goto flash
 
 echo "You have to type twrp.bat flash or boot"
-goto esci
+goto exit
 
-:fai_boot
+:boot
 bin\fastboot.exe boot img\twrp.img
-goto esci
+goto exit
 
-:fai_flash
+:flash
 bin\fastboot.exe flash recovery img\twrp.img
+goto exit
 
-:esci
+:exit
