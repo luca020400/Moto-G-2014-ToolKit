@@ -6,11 +6,11 @@ echo "You have to type logo.bat nowarning or warning"
 goto exit
 
 :nowarning
-bin\fastboot.exe flash logo logo/logo-nowarning.bin
+bin\fastboot.exe flash logo mods/logo-nowarning.bin
 goto exit
 
 :warning
-bin\fastboot.exe flash logo logo/logo-warning.bin
+bin\fastboot.exe flash logo mods/logo-warning.bin
 goto exit
 
 :exit

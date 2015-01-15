@@ -1,5 +1,5 @@
 @echo off
-set twrp=img\openrecovery-twrp-2.8.3.0-titan.img
+set twrp=img\twrp.img
 if %1==boot goto boot
 if %1==flash goto flash
 

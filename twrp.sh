@@ -8,7 +8,7 @@ else
         echo "Unsupported OS"
 fi
 
-twrp=img/openrecovery-twrp-2.8.3.0-titan.img
+twrp=img/twrp.img
 
 case "$1" in
         boot)

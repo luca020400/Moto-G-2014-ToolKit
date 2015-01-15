@@ -10,10 +10,10 @@ fi
 
 case "$1" in
         nowarning)
-            $fastboot flash logo logo/logo-nowarning.bin
+            $fastboot flash logo mods/logo-nowarning.bin
             ;;
         warning)
-            $fastboot flash logo logo/logo-warning.bin
+            $fastboot flash logo mods/logo-warning.bin
             ;;
         *)
             echo "You have to type ./logo.sh warnin or nowarning"
