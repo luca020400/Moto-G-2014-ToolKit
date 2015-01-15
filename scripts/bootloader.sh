@@ -1,13 +1,5 @@
 #!/bin/bash
 
-if [ `uname -s` == "Darwin" ]; then
-        fastboot=bin/fastboot-mac
-elif [ `uname -s` == "Linux" ]; then
-        fastboot=bin/fastboot-linux
-else
-        echo "Unsupported OS"
-fi
-
 case "$1" in
         unlock)
 	    echo "Go to http://bit.ly/UpVtsa and read the risks, click next"; read line
