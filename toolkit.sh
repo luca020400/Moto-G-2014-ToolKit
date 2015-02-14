@@ -8,7 +8,6 @@ elif [ `uname -s` == "Linux" ]; then
         adb=`pwd`/bin/adb-linux
 else
         echo "Unsupported OS"
-	exit
 fi
 
 readonly version="2.0"
