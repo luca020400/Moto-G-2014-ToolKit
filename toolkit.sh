@@ -37,7 +37,7 @@ EOF
 }
 
 adb () {
-echo "You have to enable USB Debugging in Developer Settimgs"
+echo "You have to enable USB Debugging in Developer Settings"
 echo "When done Press Enter"; read
 $adb devices > /dev/null 2>&1
 echo "Click 'Always allow from this computer'"
@@ -45,7 +45,7 @@ echo "And then OK"
 }
 
 menu () {
-echo "Ultimate Moto G 2014 $version Menu:"
+echo "Universal Moto G 2014 Toolkit Menu:"
 echo "[bl] Reboot to bootloader"
 echo "[1] TWRP Flash"
 echo "[2] TWRP Boot"
@@ -63,6 +63,7 @@ echo -n "> "
 read choose
 echo
 case $choose in
+    bl ) $adb reboot-bootloader
     1 ) twrp flash;;
     2 ) twrp boot;;
     3 ) philz boot;;
