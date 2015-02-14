@@ -65,8 +65,8 @@ echo -n "> "
 read choice
 echo
 case $choice in
-    rp ) $adb reboot-bootloader;;
-    rb ) $fastboot reboot;;
+    rb ) $adb reboot-bootloader;;
+    rp ) $fastboot reboot;;
     1 ) twrp flash;;
     2 ) twrp boot;;
     3 ) philz boot;;
