@@ -39,9 +39,10 @@ EOF
 adb () {
 echo "You have to enable USB Debugging in Developer Settimgs"
 echo "When done Press Enter"; read
-adb devices > /dev/null 2>&1
+$adb devices > /dev/null 2>&1
 echo "Click 'Always allow from this computer'"
 echo "And then OK"
+}
 
 menu () {
 echo "Ultimate Moto G 2014 $version Menu:"
@@ -69,12 +70,12 @@ case $choose in
     5 ) root;;
     6 ) logo nowarning;;
     7 ) logo warning;;
-    8 ) busybox
+    8 ) busybox;;
     9 ) bootloader unlock;;
-    10 ) busybox;;
+    10 ) bootloader relock;;
     q ) echo "Exiting" && sleep 1;;
     * ) echo "Error unkown Command";;
-    esac
+esac
 }
 
 
