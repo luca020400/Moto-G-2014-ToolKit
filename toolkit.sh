@@ -36,10 +36,11 @@ cat <<EOF
 EOF
 }
 
-adb () {
+adb_authorization () {
+$adb kill-server > /dev/null 2>&1
 echo "You have to enable USB Debugging in Developer Settings"
 echo "When done Press Enter"; read
-$adb devices > /dev/null 2>&1
+$adb wait-for-device > /dev/null 2>&1
 echo "Click 'Always allow from this computer'"
 echo "And then OK"
 }
@@ -63,7 +64,7 @@ echo -n "> "
 read choose
 echo
 case $choose in
-    bl ) $adb reboot-bootloader
+    bl ) $adb reboot-bootloader;;
     1 ) twrp flash;;
     2 ) twrp boot;;
     3 ) philz boot;;
@@ -74,7 +75,7 @@ case $choose in
     8 ) busybox;;
     9 ) bootloader unlock;;
     10 ) bootloader relock;;
-    q ) echo "Exiting" && sleep 1;;
+    q ) echo "Exiting" && sleep 1 && break;;
     * ) echo "Error unkown Command";;
 esac
 }
@@ -174,6 +175,8 @@ toolkit
 echo
 disclaimer
 echo
-adb
+adb_authorization
 echo
+while true; do
 menu
+done
