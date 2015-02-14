@@ -37,6 +37,8 @@ EOF
 }
 
 adb_authorization () {
+if ! fastboot devices > /dev/null 2>&1; then
+if adb devices | grep offline > /dev/null 2>&1; then
 $adb kill-server > /dev/null 2>&1
 echo "You have to enable USB Debugging in Developer Settings"
 echo "When done Press Enter"; read
@@ -44,6 +46,8 @@ $adb "wait-for-device" > /dev/null 2>&1
 echo "Click 'Always allow from this computer'"
 echo "And then OK"
 echo "When done Press Enter"; read
+fi
+fi
 }
 
 menu () {
@@ -79,7 +83,7 @@ case $choice in
     9 ) bootloader unlock;;
     10 ) bootloader relock;;
     q ) echo "Exiting" && sleep 1 && break;;
-    * ) echo "Error Unkown Command";;
+    * ) echo "Error Unknown Command";;
 esac
 }
 
@@ -182,4 +186,5 @@ adb_authorization
 echo
 while true; do
 menu
+clear
 done
