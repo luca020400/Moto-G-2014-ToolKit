@@ -13,16 +13,13 @@ else
     echo "Unsupported OS"
 fi
 
-readonly version="2.0"
-
 toolkit () {
-echo "*********************************"
-echo "* Universal Moto G 2014 Toolkit *"
-echo "*         by luca020400         *"
-echo "*                               *"
-echo "*    Press Enter to continue    *"
-echo "*     Press CTRL+c to abort     *"
-echo "*********************************"
+echo "Universal Moto G 2014 Toolkit"
+echo "By luca020400"
+echo "Version 2.0"
+echo
+echo "Press Enter to continue"
+echo "Press CTRL+c to abort"
 }
 
 disclaimer () {
