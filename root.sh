@@ -10,7 +10,7 @@ else
         echo "Unsupported OS"
 fi
 
-supersu=UPDATE-SuperSU-v2.40.zip
+supersu=UPDATE-SuperSU-v2.46.zip
 
 $fastboot boot img/twrp.img
 sleep 20

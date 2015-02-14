@@ -1,6 +1,6 @@
 @echo off
 
-set supersu=UPDATE-SuperSU-v2.40.zip
+set supersu=UPDATE-SuperSU-v2.46.zip
 
 bin\fastboot.exe boot img/twrp.img
 timeout 20
