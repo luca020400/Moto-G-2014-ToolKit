@@ -1,13 +1,16 @@
 #!/bin/bash
 
-if [ `uname -s` == "Darwin" ]; then
-        fastboot=`pwd`/bin/fastboot-mac
-        adb=`pwd`/bin/adb-mac
+if command -v fastboot >/dev/null 2>&1 && command -v adb >/dev/null 2>&1; then
+    fastboot=fastboot
+    adb=adb
+elif [ `uname -s` == "Darwin" ]; then
+    fastboot=`pwd`/bin/fastboot-mac
+    adb=`pwd`/bin/adb-mac
 elif [ `uname -s` == "Linux" ]; then
-        fastboot=`pwd`/bin/fastboot-linux
-        adb=`pwd`/bin/adb-linux
+    fastboot=`pwd`/bin/fastboot-linux
+    adb=`pwd`/bin/adb-linux
 else
-        echo "Unsupported OS"
+    echo "Unsupported OS"
 fi
 
 readonly version="2.0"
@@ -81,32 +84,31 @@ esac
 
 bootloader () {
 case "$1" in
-        unlock)
-            echo "Are you sure ?? Do you know the risks ?? Are you willing to do this ??"
-            echo "If so Press Enter"; read
-            echo "Go to http://bit.ly/UpVtsa and read the risks"
-            sleep 2
-            echo "When done press Enter"; read
-	    echo "Follow the guide inside the site and then"
-
-            echo "Enter this code"
-            $fastboot oem get_unlock_data
-            echo "As shown in the example"
-            echo "Enter the key emailed to you here :"
-            read code
-            $fastboot oem unlock $code
-            ;;
-        relock)
-            $fastboot lock begin
-            echo "Now you have to flash the stock image"
-            echo "This is an example http://forum.xda-developers.com/moto-g-2014/general/restore-to-stock-t2873657"
-            echo "When done press Enter"; read
-            $fastboot oem lock
-            echo "Your bootloader is now locked"
-            ;;
-        *)
-            echo "You have to type ./bootloader.sh unlock or relock"
-	    ;;
+    unlock)
+        echo "Are you sure ?? Do you know the risks ?? Are you willing to do this ??"
+        echo "If so Press Enter"; read
+        echo "Go to http://bit.ly/UpVtsa and read the risks"
+        sleep 2
+        echo "When done press Enter"; read
+        echo "Follow the guide inside the site and then"
+        echo "Enter this code"
+        $fastboot oem get_unlock_data
+        echo "As shown in the example"
+        echo "Enter the key emailed to you here :"
+        read code
+        $fastboot oem unlock $code
+        ;;
+    relock)
+        $fastboot lock begin
+        echo "Now you have to flash the stock image"
+        echo "This is an example http://forum.xda-developers.com/moto-g-2014/general/restore-to-stock-t2873657"
+        echo "When done press Enter"; read
+        $fastboot oem lock
+        echo "Your bootloader is now locked"
+        ;;
+    *)
+        echo "You have to type ./bootloader.sh unlock or relock"
+        ;;
 esac
 }
 
@@ -121,29 +123,28 @@ $adb reboot-bootloader
 
 logo () {
 case "$1" in
-        nowarning)
-            $fastboot flash logo mods/logo-nowarning.bin
-            ;;
-        warning)
-            $fastboot flash logo mods/logo-warning.bin
-            ;;
-        *)
-            echo "You have to type ./logo.sh warnin or nowarning"
+    nowarning)
+        $fastboot flash logo mods/logo-nowarning.bin
+        ;;
+    warning)
+        $fastboot flash logo mods/logo-warning.bin
+        ;;
+    *)
+        echo "You have to type ./logo.sh warnin or nowarning"
 esac
 }
 
 
 philz () {
 case "$1" in
-        boot)
-            $fastboot boot img/philz.img
-            ;;
-
-        flash)
-            $fastboot flash recovery img/philz.img
-            ;;
-        *)
-            echo "You have to type ./philz.sh flash or boot"
+    boot)
+        $fastboot boot img/philz.img
+        ;;
+    flash)
+        $fastboot flash recovery img/philz.img
+        ;;
+    *)
+        echo "You have to type ./philz.sh flash or boot"
 esac
 }
 
@@ -160,15 +161,14 @@ $adb reboot-bootloader
 
 twrp () {
 case "$1" in
-        boot)
-            $fastboot boot img/twrp.img
-            ;;
-
-        flash)
-            $fastboot flash recovery img/twrp.img
-            ;;
-        *)
-            echo "You have to type ./twrp.sh flash or boot"
+    boot)
+        $fastboot boot img/twrp.img
+        ;;
+    flash)
+        $fastboot flash recovery img/twrp.img
+        ;;
+    *)
+        echo "You have to type ./twrp.sh flash or boot"
 esac
 }
 
