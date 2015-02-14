@@ -19,7 +19,7 @@ echo "By luca020400"
 echo "Version 2.0"
 echo
 echo "Press Enter to continue"
-echo "Press CTRL+c to abort"
+echo "Press CTRL+c to abort";read
 }
 
 disclaimer () {
@@ -43,6 +43,7 @@ echo "When done Press Enter"; read
 $adb "wait-for-device" > /dev/null 2>&1
 echo "Click 'Always allow from this computer'"
 echo "And then OK"
+echo "When done Press Enter"; read
 }
 
 menu () {
@@ -65,8 +66,8 @@ echo -n "> "
 read choice
 echo
 case $choice in
-    rb ) $adb reboot-bootloader;;
-    rp ) $fastboot reboot;;
+    rb ) $adb "wait-for-device" reboot-bootloader > /dev/null 2>&1;;
+    rp ) $fastboot reboot > /dev/null 2>&1;;
     1 ) twrp flash;;
     2 ) twrp boot;;
     3 ) philz boot;;
@@ -78,7 +79,7 @@ case $choice in
     9 ) bootloader unlock;;
     10 ) bootloader relock;;
     q ) echo "Exiting" && sleep 1 && break;;
-    * ) echo "Error unkown Command";;
+    * ) echo "Error Unkown Command";;
 esac
 }
 
@@ -173,8 +174,8 @@ case "$1" in
 esac
 }
 
+clear
 toolkit
-echo
 disclaimer
 echo
 adb_authorization
