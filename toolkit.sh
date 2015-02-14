@@ -37,8 +37,8 @@ EOF
 }
 
 adb_authorization () {
-if ! fastboot devices > /dev/null 2>&1; then
-if adb devices | grep offline > /dev/null 2>&1; then
+if ! $fastboot devices > /dev/null 2>&1; then
+if $adb "wait-for-device" devices | grep offline > /dev/null 2>&1; then
 $adb kill-server > /dev/null 2>&1
 echo "You have to enable USB Debugging in Developer Settings"
 echo "When done Press Enter"; read
@@ -46,6 +46,7 @@ $adb "wait-for-device" > /dev/null 2>&1
 echo "Click 'Always allow from this computer'"
 echo "And then OK"
 echo "When done Press Enter"; read
+echo
 fi
 fi
 }
@@ -59,8 +60,8 @@ echo "[2] TWRP Boot"
 echo "[3] Philz Flash"
 echo "[4] Philz Boot"
 echo "[5] Root"
-echo "[6] Logo Without Waring"
-echo "[7] Logo With Waring"
+echo "[6] Logo Without Warning"
+echo "[7] Logo With Warning"
 echo "[8] Busybox"
 echo "[9] Bootloader Unlock"
 echo "[10] Bootloader Relock"
@@ -183,7 +184,6 @@ toolkit
 disclaimer
 echo
 adb_authorization
-echo
 while true; do
 menu
 clear
