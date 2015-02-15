@@ -1,5 +1,6 @@
 #!/bin/bash
 
+setup () {
 if command -v fastboot >/dev/null 2>&1 && command -v adb >/dev/null 2>&1; then
     fastboot=fastboot
     adb=adb
@@ -14,6 +15,10 @@ else
 fi
 
 log_file=".log_toolkit"
+supersuver="2.46"
+supersuzip="UPDATE-SuperSU-v$supersuver.zip"
+twrp="openrecovery-twrp-2.8.5.0-titan.img"
+}
 
 toolkit () {
 echo "Universal Moto G 2014 Toolkit"
@@ -68,7 +73,7 @@ echo "[1] TWRP 2.8.5.0 Flash"
 echo "[2] TWRP 2.8.5.0 Boot"
 echo "[3] Philz Flash"
 echo "[4] Philz Boot"
-echo "[5] Root with SuperSu 1.46"
+echo "[5] Root with SuperSU $supersuver"
 echo "[6] Logo Without Warning"
 echo "[7] Logo With Warning"
 echo "[8] Busybox Installer"
@@ -127,7 +132,7 @@ esac
 }
 
 busybox () {
-$fastboot boot img/twrp.img
+$fastboot boot img/$twrp.img
 sleep 20
 $adb push mods/busybox.zip /tmp/.
 $adb shell twrp install /tmp/busybox.zip
@@ -159,12 +164,10 @@ esac
 }
 
 root () {
-supersu=UPDATE-SuperSU-v2.46.zip
-
-$fastboot boot img/twrp.img
+$fastboot boot img/$twrp.img
 sleep 20
-$adb push mods/$supersu /tmp/.
-$adb shell twrp install /tmp/$supersu
+$adb push mods/$supersuzip /tmp/.
+$adb shell twrp install /tmp/$supersuzip
 $adb reboot-bootloader
 }
 
@@ -172,15 +175,16 @@ $adb reboot-bootloader
 twrp () {
 case "$1" in
     boot)
-        $fastboot boot img/twrp.img
+        $fastboot boot img/$twrp.img
         ;;
     flash)
-        $fastboot flash recovery img/twrp.img
+        $fastboot flash recovery img/$twrp.img
         ;;
 esac
 }
 
 touch $log_file
+setup
 clear
 toolkit
 disclaimer
