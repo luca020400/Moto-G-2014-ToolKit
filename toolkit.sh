@@ -43,16 +43,20 @@ fi
 }
 
 adb_authorization () {
-if ! $fastboot devices > /dev/null 2>&1; then
-if $adb "wait-for-device" devices | grep offline > /dev/null 2>&1; then
+if ! cat $log_file | grep adb=true >/dev/null 2>&1; then
+if ! $fastboot devices | grep fastboot > /dev/null 2>&1; then
+$adb start-server > /dev/null 2>&1
+if $adb devices | grep offline > /dev/null 2>&1 || ! $adb devices | grep device > /dev/null 2>&1; then
 $adb kill-server > /dev/null 2>&1
 echo "You have to enable USB Debugging in Developer Settings"
 echo "When done Press Enter"; read
-$adb "wait-for-device" > /dev/null 2>&1
 echo "Click 'Always allow from this computer'"
 echo "And then OK"
+$adb "wait-for-device" > /dev/null 2>&1
 echo "When done Press Enter"; read
 echo
+echo adb=true >> $log_file
+fi
 fi
 fi
 }
@@ -176,7 +180,6 @@ case "$1" in
 esac
 }
 
-touch $log_file
 clear
 toolkit
 disclaimer
