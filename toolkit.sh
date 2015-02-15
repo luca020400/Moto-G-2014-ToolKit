@@ -34,6 +34,7 @@ cat <<EOF
  * you point the finger at me for messing up your device, I will laugh at you. Hard. A lot.
  */
 EOF
+echo "If you agree Press Enter"; read
 }
 
 adb_authorization () {
