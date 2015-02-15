@@ -55,7 +55,9 @@ echo "And then OK"
 $adb "wait-for-device" > /dev/null 2>&1
 echo "When done Press Enter"; read
 echo
+if $adb devices | grep device > /dev/null 2>&1; then
 echo adb=true >> $log_file
+fi
 fi
 fi
 fi
