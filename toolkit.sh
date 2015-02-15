@@ -61,16 +61,17 @@ fi
 
 menu () {
 echo "Universal Moto G 2014 Toolkit Menu:"
-echo "[rb] Reboot to bootloader"
-echo "[rp] Reboot to phone"
-echo "[1] TWRP Flash"
-echo "[2] TWRP Boot"
+echo "[rb] Reboot to Bootloader from Phone"
+echo "[rp] Reboot to Phone from Bootloader"
+echo "[rr] Reboot to Recovery from Phone"
+echo "[1] TWRP 2.8.5.0 Flash"
+echo "[2] TWRP 2.8.5.0 Boot"
 echo "[3] Philz Flash"
 echo "[4] Philz Boot"
-echo "[5] Root"
+echo "[5] Root with SuperSu 1.46"
 echo "[6] Logo Without Warning"
 echo "[7] Logo With Warning"
-echo "[8] Busybox"
+echo "[8] Busybox Installer"
 echo "[9] Bootloader Unlock"
 echo "[10] Bootloader Relock"
 echo "[q] Exit"
@@ -81,6 +82,7 @@ echo
 case $choice in
     rb ) $adb "wait-for-device" reboot-bootloader > /dev/null 2>&1;;
     rp ) $fastboot reboot > /dev/null 2>&1;;
+    rr ) $adb "wait-for-device" reboot recovery > /dev/null 2>&1;;
     1 ) twrp flash;;
     2 ) twrp boot;;
     3 ) philz boot;;
