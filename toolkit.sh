@@ -13,6 +13,8 @@ else
     echo "Unsupported OS"
 fi
 
+log_file=".log_toolkit"
+
 toolkit () {
 echo "Universal Moto G 2014 Toolkit"
 echo "By luca020400"
@@ -23,6 +25,7 @@ echo "Press CTRL+c to abort";read
 }
 
 disclaimer () {
+if ! cat $log_file | grep disclaimer=true >/dev/null 2>&1; then
 cat <<EOF
 /*
  * Your warranty is now void. Knox 0x1.
@@ -35,6 +38,8 @@ cat <<EOF
  */
 EOF
 echo "If you agree Press Enter"; read
+echo disclaimer=true >> $log_file
+fi
 }
 
 adb_authorization () {
@@ -114,9 +119,6 @@ case "$1" in
         $fastboot oem lock
         echo "Your bootloader is now locked"
         ;;
-    *)
-        echo "You have to type ./bootloader.sh unlock or relock"
-        ;;
 esac
 }
 
@@ -137,8 +139,6 @@ case "$1" in
     warning)
         $fastboot flash logo mods/logo-warning.bin
         ;;
-    *)
-        echo "You have to type ./logo.sh warnin or nowarning"
 esac
 }
 
@@ -151,8 +151,6 @@ case "$1" in
     flash)
         $fastboot flash recovery img/philz.img
         ;;
-    *)
-        echo "You have to type ./philz.sh flash or boot"
 esac
 }
 
@@ -175,15 +173,13 @@ case "$1" in
     flash)
         $fastboot flash recovery img/twrp.img
         ;;
-    *)
-        echo "You have to type ./twrp.sh flash or boot"
 esac
 }
 
+touch $log_file
 clear
 toolkit
 disclaimer
-echo
 adb_authorization
 while true; do
 menu
