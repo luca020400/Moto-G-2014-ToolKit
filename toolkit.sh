@@ -80,7 +80,7 @@ read choice
 echo
 case $choice in
     rb ) $adb "wait-for-device" reboot-bootloader > /dev/null 2>&1;;
-    rp ) $fastboot "wait-for-device" reboot > /dev/null 2>&1;;
+    rp ) $fastboot reboot > /dev/null 2>&1;;
     1 ) twrp flash;;
     2 ) twrp boot;;
     3 ) philz boot;;
@@ -185,5 +185,6 @@ disclaimer
 adb_authorization
 while true; do
 menu
+sleep 1.5
 clear
 done
