@@ -25,7 +25,7 @@ echo "Press CTRL+c to abort";read
 }
 
 disclaimer () {
-if ! cat $log_file | grep disclaimer=true >/dev/null 2>&1; then
+if ! cat $log_file | grep "disclaimer=true" >/dev/null 2>&1; then
 cat <<EOF
 /*
  * Your warranty is now void. Knox 0x1.
@@ -38,26 +38,22 @@ cat <<EOF
  */
 EOF
 echo "If you agree Press Enter"; read
-echo disclaimer=true >> $log_file
+echo "disclaimer=true" >> $log_file
 fi
 }
 
 adb_authorization () {
-if ! cat $log_file | grep adb=true >/dev/null 2>&1; then
-if ! $fastboot devices | grep fastboot > /dev/null 2>&1; then
-$adb start-server > /dev/null 2>&1
-if $adb devices | grep offline > /dev/null 2>&1 || ! $adb devices | grep device > /dev/null 2>&1; then
-$adb kill-server > /dev/null 2>&1
+if ! cat $log_file | grep "adb=true" >/dev/null 2>&1; then
+if ! $fastboot devices | grep "fastboot" > /dev/null 2>&1; then
 echo "You have to enable USB Debugging in Developer Settings"
 echo "When done Press Enter"; read
 echo "Click 'Always allow from this computer'"
 echo "And then OK"
+echo "When done Press Enter"
 $adb "wait-for-device" > /dev/null 2>&1
-echo "When done Press Enter"; read
-echo
-if $adb devices | grep device > /dev/null 2>&1; then
-echo adb=true >> $log_file
-fi
+read
+if $adb devices | grep "device" > /dev/null 2>&1; then
+echo "adb=true" >> $log_file
 fi
 fi
 fi
@@ -84,7 +80,7 @@ read choice
 echo
 case $choice in
     rb ) $adb "wait-for-device" reboot-bootloader > /dev/null 2>&1;;
-    rp ) $fastboot reboot > /dev/null 2>&1;;
+    rp ) $fastboot "wait-for-device" reboot > /dev/null 2>&1;;
     1 ) twrp flash;;
     2 ) twrp boot;;
     3 ) philz boot;;
@@ -182,6 +178,7 @@ case "$1" in
 esac
 }
 
+touch $log_file
 clear
 toolkit
 disclaimer
