@@ -44,9 +44,10 @@ pause > nul
 echo.
 
 :menu
+cls
 echo Universal Moto G 2014 Toolkit Menu
 echo.
-echo [rb] Reboot to Bootloader from Phone
+echo [rb] Reboot to Bootloader from Phone/Recovery
 echo [rp] Reboot to Phone from Bootloader
 echo [rr] Reboot to Recovery from Phone
 echo [1] TWRP 2.8.5.0 Flash
@@ -65,7 +66,7 @@ SET /P choice=">
 echo.
 if %choice%==rb %adb% reboot-bootloader > nul & cls
 if %choice%==rp %fastboot% reboot > nul & cls
-if %choice%==rr %adb% reboot > nul & cls
+if %choice%==rr %adb% reboot Recovery > nul & cls
 if %choice%==1 goto twrp_flash
 if %choice%==2 goto twrp_boot
 if %choice%==3 goto philz_flash
@@ -76,15 +77,9 @@ if %choice%==7 goto logo_warn
 if %choice%==8 goto busybox
 if %choice%==9 goto bootloader_unlock
 if %choice%==10 goto bootloader_relock
-if %choice%==q (
-  echo Exiting ...
-  exit /b
-) else (
-  echo Error Unknown Command
-  ping 1.1.1.1 -n 1 -w 3000 > nul
-  cls 
-  goto :menu
-)
+if %choice%==q echo Exiting ... & exit /b
+echo Unknown Command
+goto menu
 
 :twrp_flash
 %fastboot% flash recovery %twrp%
