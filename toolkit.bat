@@ -2,20 +2,25 @@
 
 set adb="bin\adb.exe"
 set fastboot="bin\fastboot.exe"
-
 set log_file=".log_toolkit"
 set supersuver="2.46"
 set supersuzip="UPDATE-SuperSU-v$supersuver.zip"
-set twrp="openrecovery-twrp-2.8.5.0-titan.img"
+set twrp="img\openrecovery-twrp-2.8.5.0-titan.img"
 
+goto toolkit
+goto disclaimer
+goto menu
+
+:toolkit
 echo "Universal Moto G 2014 Toolkit"
 echo "By luca020400"
 echo "Version 2.0"
 echo 
 echo "Press Enter to continue"
 echo "Press CTRL+c to abort"
-pause >nul
+pause > nul
 
+:disclaimer
 echo "/*"
 echo  "* Your warranty is now void. Knox 0x1."
 echo  "*"
@@ -29,7 +34,7 @@ echo  "*/"
 :adb_authorization
 echo "You have to enable USB Debugging in Developer Settings"
 echo "When done Press Enter"
-pause >nul
+pause > nul
 echo "Click 'Always allow from this computer'"
 echo "And then OK"
 echo "When done Press Enter"
@@ -67,5 +72,65 @@ if %choice%==7 goto logo_warn
 if %choice%==8 goto busybox
 if %choice%==9 goto bootloader_unlock
 if %choice%==10 goto bootloader_relock
-if %choice%==q goto exit
-else echo "Error Unknown Command" & goto :menu
+if %choice%==q exit /b
+else (
+    echo "Error Unknown Command"
+    goto :menu
+)
+
+:twrp_flash
+%fastboot% flash recovery %twrp%
+
+:twrp_boot
+%fastboot% boot %twrp%
+
+:philz_flash
+&fastboot% flash recovery img\philz.img
+
+:philz_boot
+%fastboot% boot img\philz.img
+
+:root
+%fastboot% boot img/twrp.img
+timeout 20
+%adb% push mods\%supersu% /tmp/.
+%adb% shell twrp install /tmp/%supersu%
+%adb% reboot-bootloader
+
+:logo_nowarn
+%fastboot% flash logo mods/logo-nowarning.bin
+
+:logo_warn
+%fastboot% flash logo mods/logo-warning.bin
+
+:busybox
+%fastboot% boot %twrp%
+timeout 20
+%adb% push mods\busybox.zip /tmp/.
+%adb% shell twrp install /tmp/busybox.zip
+%adb% reboot-bootloader
+
+:bootloader_unlock
+echo "Are you sure ?? Do you know the risks ?? Are you willing to do this ??"
+echo "If so Press Enter"
+pause > nul
+echo "Go to http://bit.ly/UpVtsa and read the risks"
+ping 1.1.1.1 -n 1 -w 2000 > nul
+echo "When done press Enter"
+pause > nul
+echo "Follow the guide inside the site and then"
+echo "Enter this code"
+%fastboot% oem get_unlock_data
+echo "As shown in the example"
+echo "Enter the key emailed to you here :"
+SET /P code="> "
+%fastboot% oem unlock $code
+
+:bootloader_relock
+bin\fastboot lock begin
+echo "Now you have to flash the stock image"
+echo "This is an example http://forum.xda-developers.com/moto-g-2014/general/restore-to-stock-t2873657"
+echo "When done press Enter"
+pause > nul
+%fastboot% oem lock
+echo "Your bootloader is now locked"
