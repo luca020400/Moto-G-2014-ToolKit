@@ -59,9 +59,9 @@ echo "[q] Exit"
 echo ""
 SET /P choice="> "
 echo ""
-if %choice%==rb %adb% reboot-bootloader
-if %choice%==rp %fastboot% reboot
-if %choice%==rr %adb% reboot
+if %choice%==rb %adb% reboot-bootloader & cls
+if %choice%==rp %fastboot% reboot & cls
+if %choice%==rr %adb% reboot & cls
 if %choice%==1 goto twrp_flash
 if %choice%==2 goto twrp_boot
 if %choice%==3 goto philz_flash
@@ -73,22 +73,27 @@ if %choice%==8 goto busybox
 if %choice%==9 goto bootloader_unlock
 if %choice%==10 goto bootloader_relock
 if %choice%==q exit /b
-else (
-    echo "Error Unknown Command"
-    goto :menu
-)
+else echo "Error Unknown Command" & cls & goto :menu
 
 :twrp_flash
 %fastboot% flash recovery %twrp%
+cls
+goto :menu
 
 :twrp_boot
 %fastboot% boot %twrp%
+cls
+goto :menu
 
 :philz_flash
 &fastboot% flash recovery img\philz.img
+cls
+goto :menu
 
 :philz_boot
 %fastboot% boot img\philz.img
+cls
+goto :menu
 
 :root
 %fastboot% boot img/twrp.img
@@ -96,12 +101,18 @@ timeout 20
 %adb% push mods\%supersu% /tmp/.
 %adb% shell twrp install /tmp/%supersu%
 %adb% reboot-bootloader
+cls
+goto :menu
 
 :logo_nowarn
 %fastboot% flash logo mods/logo-nowarning.bin
+cls
+goto :menu
 
 :logo_warn
 %fastboot% flash logo mods/logo-warning.bin
+cls
+goto :menu
 
 :busybox
 %fastboot% boot %twrp%
@@ -109,6 +120,8 @@ timeout 20
 %adb% push mods\busybox.zip /tmp/.
 %adb% shell twrp install /tmp/busybox.zip
 %adb% reboot-bootloader
+cls
+goto :menu
 
 :bootloader_unlock
 echo "Are you sure ?? Do you know the risks ?? Are you willing to do this ??"
@@ -125,6 +138,8 @@ echo "As shown in the example"
 echo "Enter the key emailed to you here :"
 SET /P code="> "
 %fastboot% oem unlock $code
+cls
+goto :menu
 
 :bootloader_relock
 %fastboot% lock begin
@@ -134,3 +149,5 @@ echo "When done press Enter"
 pause > nul
 %fastboot% oem lock
 echo "Your bootloader is now locked"
+cls
+goto :menu
