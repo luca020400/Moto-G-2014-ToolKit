@@ -1,10 +1,10 @@
 @echo off
 
-set adb="bin\adb.exe"
-set fastboot="bin\fastboot.exe"
-set supersuver="2.46"
-set supersuzip="UPDATE-SuperSU-v$supersuver.zip"
-set twrp="img\openrecovery-twrp-2.8.5.0-titan.img"
+set adb=bin\adb.exe
+set fastboot=bin\fastboot.exe
+set supersuver=2.46
+set supersuzip=UPDATE-SuperSU-v$supersuver.zip
+set twrp=img\openrecovery-twrp-2.8.5.0-titan.img
 
 goto toolkit
 goto disclaimer
@@ -14,10 +14,11 @@ goto menu
 echo Universal Moto G 2014 Toolkit
 echo By luca020400
 echo Version 2.0
-echo
+echo.
 echo Press Enter to continue
 echo Press CTRL+c to abort
 pause > nul
+echo.
 
 :disclaimer
 echo /*
@@ -29,6 +30,7 @@ echo  * Please do some research if you have any concerns about this tool !
 echo  * YOU are choosing to make these modifications, and if
 echo  * you point the finger at me for messing up your device, I will laugh at you. Hard. A lot.
 echo  */
+echo.
 
 :adb_authorization
 echo You have to enable USB Debugging in Developer Settings
@@ -38,10 +40,12 @@ echo Click 'Always allow from this computer'
 echo And then OK
 echo When done Press Enter
 %adb% wait-for-device > nul
+pause > nul
+echo.
 
 :menu
 echo Universal Moto G 2014 Toolkit Menu
-echo
+echo.
 echo [rb] Reboot to Bootloader from Phone
 echo [rp] Reboot to Phone from Bootloader
 echo [rr] Reboot to Recovery from Phone
@@ -56,9 +60,9 @@ echo [8] Busybox Installer
 echo [9] Bootloader Unlock
 echo [10] Bootloader Relock
 echo [q] Exit
-echo
+echo.
 SET /P choice="> 
-echo
+echo.
 if %choice%==rb %adb% reboot-bootloader > nul & cls
 if %choice%==rp %fastboot% reboot > nul & cls
 if %choice%==rr %adb% reboot > nul & cls
@@ -72,8 +76,15 @@ if %choice%==7 goto logo_warn
 if %choice%==8 goto busybox
 if %choice%==9 goto bootloader_unlock
 if %choice%==10 goto bootloader_relock
-if %choice%==q exit /b
-else echo Error Unknown Command & cls & goto :menu
+if %choice%==q (
+  echo Exiting ...
+  exit /b
+) else (
+  echo Error Unknown Command
+  ping 1.1.1.1 -n 1 -w 3000 > nul
+  cls 
+  goto :menu
+)
 
 :twrp_flash
 %fastboot% flash recovery %twrp%
@@ -97,7 +108,7 @@ goto :menu
 
 :root
 %fastboot% boot img/twrp.img
-timeout 20
+ping 1.1.1.1 -n 1 -w 20000 > nul
 %adb% push mods\%supersu% /tmp/.
 %adb% shell twrp install /tmp/%supersu%
 %adb% reboot-bootloader
@@ -116,7 +127,7 @@ goto :menu
 
 :busybox
 %fastboot% boot %twrp%
-timeout 20
+ping 1.1.1.1 -n 1 -w 20000 > nul
 %adb% push mods\busybox.zip /tmp/.
 %adb% shell twrp install /tmp/busybox.zip
 %adb% reboot-bootloader
