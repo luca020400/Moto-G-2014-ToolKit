@@ -18,12 +18,13 @@ log_file=".log_toolkit"
 supersuver="2.46"
 supersuzip="UPDATE-SuperSU-v$supersuver.zip"
 twrp="openrecovery-twrp-2.8.5.0-titan.img"
+version="2.1"
 }
 
 toolkit () {
 echo "Universal Moto G 2014 Toolkit"
 echo "By luca020400"
-echo "Version 2.0"
+echo "Version $version"
 echo
 echo "Press Enter to continue"
 echo "Press CTRL+c to abort";read
@@ -79,6 +80,11 @@ echo "[7] Logo With Warning"
 echo "[8] Busybox Installer"
 echo "[9] Bootloader Unlock"
 echo "[10] Bootloader Relock"
+if [ `uname -s` == "Linux" ]; then
+if ! cat $log_file | grep "udev_rules=true" >/dev/null 2>&1; then
+echo "[ur] Add Android Udev Rules"
+fi
+fi
 echo "[q] Exit"
 echo
 echo -n "> "
@@ -98,6 +104,7 @@ case $choice in
     8 ) busybox;;
     9 ) bootloader unlock;;
     10 ) bootloader relock;;
+    ur ) udev_rules;;
     q ) echo "Exiting" && sleep 1 && break;;
     * ) echo "Error Unknown Command";;
 esac
@@ -181,6 +188,16 @@ case "$1" in
         $fastboot flash recovery img/$twrp.img
         ;;
 esac
+}
+
+udev_rules () {
+echo "Fix the issue described here https://github.com/luca020400/Moto-G-2014-ToolKit/issues/1"
+echo "You need sudo permission"
+echo "Press Enter to continue"; read
+sudo curl --create-dirs -L -o /etc/udev/rules.d/51-android.rules -O -L http://luca020400.altervista.org/stuff/51-android.rules  > /dev/null 2>&1
+sudo udevadm control --reload-rules
+echo "Added Android Udev Rules"
+echo udev_rules=true >> $log_file
 }
 
 touch $log_file
