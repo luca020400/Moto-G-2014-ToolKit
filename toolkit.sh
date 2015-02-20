@@ -65,41 +65,6 @@ fi
 fi
 }
 
-device_info () {
-echo "Checking Device Name And Android Version"
-devicemotid=`adb shell getprop ro.mot.build.customerid | tr -d '[[:space:]]'`
-case $devicemotid in
-    retusa_glb ) device="XT1063";;
-    retusa_aws ) device="XT1064";;
-    retaildsdsall ) device="XT1068";;
-    retbr ) device="XT1069";;
-    * ) device="Not Found";;
-esac
-
-android=`adb shell getprop ro.build.version.release`
-case $android in
-    5.0.* ) android_name="LolliPop";;
-    4.4.* ) android_name="KitKat";;
-    * ) android_name="Not Found" && android="Not Found";;
-esac
-
-if [ $device="Not Found" || $android_name="Not Found" || $android="Not Found" ]; then
-echo "Device or Android version not found"
-echo "Send me a pm with device model ( XT106* ) and these vaules:"
-echo "Device Mot Id : $devicemotid"
-echo "Android Version : `adb shell getprop ro.build.version.release`"
-else
-echo "Device : $device"
-echo "Android : $android_name $android"
-echo "Check if values given are true"
-echo "If not send me a pm and I add support"
-echo "Press Enter if Values are True";read
-echo devicemotid=$devicemotid >> $log_file
-echo device=$device >> $log_file
-echo android=$android $android_name >> $log_file
-fi
-}
-
 menu () {
 echo "Universal Moto G 2014 Toolkit Menu:"
 echo "[rb] Reboot to Bootloader from Phone"
@@ -242,7 +207,6 @@ clear
 toolkit
 disclaimer
 adb_authorization
-device_info
 while true; do
 menu
 sleep 1.5
