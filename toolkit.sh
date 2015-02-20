@@ -80,14 +80,16 @@ android=`adb shell getprop ro.build.version.release`
 case $android in
     5.0.* ) android_name="LolliPop";;
     4.4.* ) android_name="KitKat";;
-    * ) android_name="Not Found" && android="Not Found";;
+    * ) android_name="Not Found";;
 esac
 
-if [ $device="Not Found" || $android_name="Not Found" || $android="Not Found" ]; then
+if [ $device="Not Found" || $android_name="Not Found" ]; then
 echo "Device or Android version not found"
-echo "Send me a pm with device model ( XT106* ) and these vaules:"
+echo "Send me a pm with these lines ( some of them need to be completed ** ) :"
+echo "Device Model : XT****"
 echo "Device Mot Id : $devicemotid"
-echo "Android Version : `adb shell getprop ro.build.version.release`"
+echo "Android Version : $android"
+echo "Android Version Name : ****"
 else
 echo "Device : $device"
 echo "Android : $android_name $android"
