@@ -19,6 +19,8 @@ supersuver="2.46"
 supersuzip="UPDATE-SuperSU-v$supersuver.zip"
 twrp="openrecovery-twrp-2.8.5.0-titan.img"
 version="2.1"
+
+touch $log_file
 }
 
 toolkit () {
@@ -49,7 +51,7 @@ fi
 }
 
 adb_authorization () {
-if ! cat $log_file | grep "adb=true" >/dev/null 2>&1; then
+if ! cat $log_file | grep "adb=true" > /dev/null 2>&1;then
 if ! $fastboot devices | grep "fastboot" > /dev/null 2>&1; then
 echo "You have to enable USB Debugging in Developer Settings"
 echo "When done Press Enter"; read
@@ -66,39 +68,48 @@ fi
 }
 
 device_info () {
+devicemotid=`adb shell getprop ro.mot.build.customerid | tr -d '[[:space:]]'`
+android=`adb shell getprop ro.build.version.release | tr -d '[[:space:]]'`
+
+if ! cat $log_file | grep "devicemotid=$devicemotid" > /dev/null 2>&1 && ! cat $log_file | grep "android=$android" > /dev/null 2>&1; then
+
 echo "Checking Device Name And Android Version"
 devicemotid=`adb shell getprop ro.mot.build.customerid | tr -d '[[:space:]]'`
+android=`adb shell getprop ro.build.version.release | tr -d '[[:space:]]'`
+
 case $devicemotid in
     retusa_glb ) device="XT1063";;
     retusa_aws ) device="XT1064";;
     retaildsdsall ) device="XT1068";;
     retbr ) device="XT1069";;
-    * ) device="Not Found";;
+    * ) device="unknown";;
 esac
 
-android=`adb shell getprop ro.build.version.release`
 case $android in
     5.0.* ) android_name="LolliPop";;
     4.4.* ) android_name="KitKat";;
-    * ) android_name="Not Found";;
+    * ) android_name="unknown";;
 esac
 
-if [ $device="Not Found" || $android_name="Not Found" ]; then
+if [ $device != "unknown" ] && [ $android_name != "unknown" ]; then
+echo "Device : $device"
+echo "Android : $android_name $android"
+echo "Check if values given are true"
+echo "If not send me a pm and I will add support"
+echo "Press Enter if Values are True";read
+echo devicemotid=$devicemotid >> $log_file
+echo device=$device >> $log_file
+echo android=$android >> $log_file
+echo android_name=$android_name >> $log_file
+else
 echo "Device or Android version not found"
 echo "Send me a pm with these lines ( some of them need to be completed ** ) :"
 echo "Device Model : XT****"
 echo "Device Mot Id : $devicemotid"
 echo "Android Version : $android"
 echo "Android Version Name : ****"
-else
-echo "Device : $device"
-echo "Android : $android_name $android"
-echo "Check if values given are true"
-echo "If not send me a pm and I add support"
-echo "Press Enter if Values are True";read
-echo devicemotid=$devicemotid >> $log_file
-echo device=$device >> $log_file
-echo android=$android $android_name >> $log_file
+exit
+fi
 fi
 }
 
@@ -231,14 +242,13 @@ udev_rules () {
 echo "Fix the issue described here https://github.com/luca020400/Moto-G-2014-ToolKit/issues/1"
 echo "You need sudo permission"
 echo "Press Enter to continue"; read
-rm -rf /etc/udev/rules.d/51-android.rules
-sudo curl --create-dirs -L -o /etc/udev/rules.d/51-android.rules -O -L http://luca020400.altervista.org/stuff/51-android.rules  > /dev/null 2>&1
+sudo rm -rf /etc/udev/rules.d/51-android.rules
+sudo curl --create-dirs -L -o /etc/udev/rules.d/51-android.rules -O -L http://luca020400.altervista.org/stuff/51-android.rules > /dev/null 2>&1
 sudo udevadm control --reload-rules
 echo "Added Android Udev Rules"
 echo udev_rules=true >> $log_file
 }
 
-touch $log_file
 setup
 clear
 toolkit
