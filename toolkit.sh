@@ -229,8 +229,8 @@ udev_rules () {
 echo "Fix the issue described here https://github.com/luca020400/Moto-G-2014-ToolKit/issues/1"
 echo "You need sudo permission"
 echo "Press Enter to continue"; read
-rm -rf /etc/udev/rules.d/51-android.rules
-sudo curl --create-dirs -L -o /etc/udev/rules.d/51-android.rules -O -L http://luca020400.altervista.org/stuff/51-android.rules  > /dev/null 2>&1
+sudo rm -rf /etc/udev/rules.d/51-android.rules
+sudo curl --create-dirs -L -o /etc/udev/rules.d/51-android.rules -O -L http://luca020400.altervista.org/stuff/51-android.rules > /dev/null 2>&1
 sudo udevadm control --reload-rules
 echo "Added Android Udev Rules"
 echo udev_rules=true >> $log_file
