@@ -74,8 +74,6 @@ android=`adb shell getprop ro.build.version.release | tr -d '[[:space:]]'`
 if ! cat $log_file | grep "devicemotid=$devicemotid" > /dev/null 2>&1 && ! cat $log_file | grep "android=$android" > /dev/null 2>&1; then
 
 echo "Checking Device Name And Android Version"
-devicemotid=`adb shell getprop ro.mot.build.customerid | tr -d '[[:space:]]'`
-android=`adb shell getprop ro.build.version.release | tr -d '[[:space:]]'`
 
 case $devicemotid in
     retusa_glb ) device="XT1063";;
