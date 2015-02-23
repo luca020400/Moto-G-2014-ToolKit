@@ -19,6 +19,8 @@ supersuver="2.46"
 supersuzip="UPDATE-SuperSU-v$supersuver.zip"
 twrp="openrecovery-twrp-2.8.5.0-titan.img"
 version="2.1"
+
+touch $log_file
 }
 
 toolkit () {
@@ -201,7 +203,6 @@ echo "Added Android Udev Rules"
 echo udev_rules=true >> $log_file
 }
 
-touch $log_file
 setup
 clear
 toolkit
