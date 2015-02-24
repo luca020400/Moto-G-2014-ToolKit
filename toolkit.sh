@@ -193,12 +193,14 @@ esac
 }
 
 udev_rules () {
+adb kill-server > /dev/null 2>&1
 echo "Fix the issue described here https://github.com/luca020400/Moto-G-2014-ToolKit/issues/1"
 echo "You need sudo permission"
 echo "Press Enter to continue"; read
 sudo rm -rf /etc/udev/rules.d/51-android.rules
 sudo curl --create-dirs -L -o /etc/udev/rules.d/51-android.rules -O -L http://luca020400.altervista.org/stuff/51-android.rules > /dev/null 2>&1
-sudo udevadm control --reload-rules
+sudo sh -c "(udevadm control --reload-rules && udevadm trigger --action=change)"
+adb start-server > /dev/null 2>&1
 echo "Added Android Udev Rules"
 echo udev_rules=true >> $log_file
 }
