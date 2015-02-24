@@ -102,7 +102,7 @@ cls
 goto :menu
 
 :root
-%fastboot% boot img/twrp.img
+%fastboot% boot %twrp%
 ping 1.1.1.1 -n 1 -w 20000 > nul
 %adb% push mods\%supersu% /tmp/.
 %adb% shell twrp install /tmp/%supersu%
