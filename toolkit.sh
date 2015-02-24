@@ -185,7 +185,7 @@ esac
 }
 
 busybox () {
-$fastboot boot img/$twrp.img
+$fastboot boot img/$twrp
 sleep 20
 $adb push mods/busybox.zip /tmp/.
 $adb shell twrp install /tmp/busybox.zip
@@ -217,7 +217,7 @@ esac
 }
 
 root () {
-$fastboot boot img/$twrp.img
+$fastboot boot img/$twrp
 sleep 20
 $adb push mods/$supersuzip /tmp/.
 $adb shell twrp install /tmp/$supersuzip
