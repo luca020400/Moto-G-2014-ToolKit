@@ -184,10 +184,10 @@ $adb reboot-bootloader
 twrp () {
 case "$1" in
     boot)
-        $fastboot boot img/$twrp.img
+        $fastboot boot img/$twrp
         ;;
     flash)
-        $fastboot flash recovery img/$twrp.img
+        $fastboot flash recovery img/$twrp
         ;;
 esac
 }
