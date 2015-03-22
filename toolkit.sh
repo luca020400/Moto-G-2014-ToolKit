@@ -79,6 +79,7 @@ case $devicemotid in
     retusa_glb ) device="XT1063";;
     retusa_aws ) device="XT1064";;
     retaildsdsall ) device="XT1068";;
+    retla ) device="XT1068";;
     retbr ) device="XT1069";;
     * ) device="unknown";;
 esac
