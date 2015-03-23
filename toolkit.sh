@@ -5,7 +5,7 @@ if command -v fastboot >/dev/null 2>&1 && command -v adb >/dev/null 2>&1; then
     fastboot=fastboot
     adb=adb
 elif [ `uname -s` == "Darwin" ]; then
-    fastboot=`pwd`/bin/fastboot-mac
+    fastboot=`pwd`/bin/fastboot-macan
     adb=`pwd`/bin/adb-mac
 elif [ `uname -s` == "Linux" ]; then
     fastboot=`pwd`/bin/fastboot-linux
@@ -79,6 +79,7 @@ case $devicemotid in
     retusa_glb ) device="XT1063";;
     retusa_aws ) device="XT1064";;
     retaildsdsall ) device="XT1068";;
+    retla ) device="XT1068";; # Latinamerica
     retbr ) device="XT1069";;
     * ) device="unknown";;
 esac
