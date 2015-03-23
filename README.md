@@ -2,13 +2,13 @@
 
 ### This tool includes :
 
-1) Universal Moto G 2014 Support
-2) Unlock / Relock the bootloader
-3) Twrp and Philz Touch Recovery
-4) Automatic Root Script
-5) Automatic BusyBox Installer
-6) Remove/Restore Unlocked Bootloader Warning
-7) Reboot to Bootloader/Recovery/Phone
+1. Universal Moto G 2014 Support
+2. Unlock / Relock the bootloader
+3. Twrp and Philz Touch Recovery
+4. Automatic Root Script
+5. Automatic BusyBox Installer
+6. Remove/Restore Unlocked Bootloader Warning
+7. Reboot to Bootloader/Recovery/Phone
 
 ## How to use:
 
