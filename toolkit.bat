@@ -4,7 +4,7 @@ set adb=bin\adb.exe
 set fastboot=bin\fastboot.exe
 set supersuver=2.46
 set supersuzip=UPDATE-SuperSU-v$supersuver.zip
-set twrp=img\openrecovery-twrp-2.8.5.0-titan.img
+set twrp=img\twrp-2.8.6.0-titan.img
 
 goto toolkit
 goto disclaimer
@@ -50,8 +50,8 @@ echo.
 echo [rb] Reboot to Bootloader from Phone/Recovery
 echo [rp] Reboot to Phone from Bootloader
 echo [rr] Reboot to Recovery from Phone
-echo [1] TWRP 2.8.5.0 Flash
-echo [2] TWRP 2.8.5.0 Boot
+echo [1] TWRP 2.8.6.0 Flash
+echo [2] TWRP 2.8.6.0 Boot
 echo [3] Philz Flash
 echo [4] Philz Boot
 echo [5] Root with SuperSU %supersuver%
